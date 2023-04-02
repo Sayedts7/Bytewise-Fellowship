@@ -7,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:notepad_firebase/utils/routes/route_names.dart';
+import 'package:notepad_firebase/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 import '../utils/utils.dart';
 
 
@@ -29,42 +31,7 @@ class _AddNoteState extends State<AddNote> {
   String now = DateFormat.yMMMMd().add_Hms().format(DateTime.now());
 
   var id = DateTime.now().millisecondsSinceEpoch.toString();
-  // Future<DateTime> _selectDate(BuildContext context) async {
-  //   final date = await showDatePicker(
-  //       context: context,
-  //       firstDate: DateTime(1900),
-  //       initialDate: selectedDate,
-  //       lastDate: DateTime(2100));
-  //   if (date != null) {
-  //     final time = await showTimePicker(
-  //       context: context,
-  //       initialTime: TimeOfDay.fromDateTime(selectedDate),
-  //     );
-  //     if (time != null) {
-  //       setState(() {
-  //         fullDate = DateTimeField.combine(date, time);
-  //         final snackBar = SnackBar(backgroundColor: Colors.green ,content: Text('Reminder added'), duration: Duration(seconds: 1));
-  //
-  //         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  //       });
-  //       //TODO
-  //       //schedule a notification
-  //
-  //       await _notificationService.scheduleNotifications(
-  //           id: id,
-  //           title: titlecontroller.text!,
-  //           body: descriptioncontroller.text!,
-  //           time: fullDate);
-  //     }
-  //     return DateTimeField.combine(date, time);
-  //   } else {
-  //     return selectedDate;
-  //   }
-  // }
-  // final NotificationService _notificationService = NotificationService();
   var image ;
-
-
 
   TextEditingController titlecontroller = TextEditingController();
   TextEditingController descriptioncontroller = TextEditingController();
@@ -82,7 +49,6 @@ class _AddNoteState extends State<AddNote> {
         print('No image selected');
       }
     });
-
   }
 
   @override
@@ -91,7 +57,7 @@ class _AddNoteState extends State<AddNote> {
       appBar: AppBar(
         title:  Text('Note'),
         actions: [
-          titlecontroller.text.isEmpty && descriptioncontroller.text.isEmpty ? Icon(Icons.save_alt, color: Colors.grey.shade700,) :
+
           IconButton(onPressed: () async{
            if(_image != null){
              firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance.ref('/notes/' + id);
@@ -107,6 +73,7 @@ class _AddNoteState extends State<AddNote> {
                  'time' : now
 
                }).then((value) {
+
                  Utils.toastMessage('Saved');
                  Navigator.pushReplacementNamed(context, RouteNames.Home);
                }).onError((error, stackTrace) {
@@ -121,16 +88,17 @@ class _AddNoteState extends State<AddNote> {
               'image' : '',
               'time' : now
 
-    }).then((value) {
-    Utils.toastMessage('Saved');
-    Navigator.pushReplacementNamed(context, RouteNames.Home);
-    }).onError((error, stackTrace) {
-    Utils.toastMessage(error.toString());
-    });
+                }).then((value) {
+                Utils.toastMessage('Saved');
+                Navigator.pushReplacementNamed(context, RouteNames.Home);
+                }).onError((error, stackTrace) {
+                Utils.toastMessage(error.toString());
+                });
 
            }
 
-          }, icon: Icon(Icons.save_alt),)
+          }, icon: Icon(Icons.save_alt),),
+
         ],
       ),
 
@@ -145,7 +113,7 @@ class _AddNoteState extends State<AddNote> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Text(now, style: const TextStyle(fontSize: 15),),
+                  child: Text(now, style: const TextStyle(fontSize: 15, color: Colors.white),),
                 ),
 
                 TextFormField(
@@ -155,24 +123,26 @@ class _AddNoteState extends State<AddNote> {
                   controller: titlecontroller,
                   decoration: const InputDecoration(
                       hintText: 'Title',
-                      hintStyle: TextStyle(fontSize: 20, color: Colors.grey,fontWeight: FontWeight.bold),
+                      hintStyle: TextStyle(fontSize: 20, color: Colors.white70,fontWeight: FontWeight.bold),
                       border: InputBorder.none
                   ),
                 ),
 
-                const Divider(),
+                const Divider(color: Colors.white,),
 
                 TextFormField(
                   minLines: 1,
                   maxLines: 1000,
                   controller: descriptioncontroller,
                   decoration: const InputDecoration(
-                      hintStyle: TextStyle( color: Colors.grey,),
+                      hintStyle: TextStyle( color: Colors.white70,),
                       hintText: 'Note something down',
                       border: InputBorder.none
                   ),
                 ),
-                Divider(),
+                const Divider(
+                  color: Colors.white,
+                ),
                 InkWell(
                   onTap: (){
                      getGalleryImage();
@@ -183,7 +153,7 @@ class _AddNoteState extends State<AddNote> {
                       width: 400,
 
                       // child: Image.asset(bytes),
-                      child:_image!= null ? Image.file(_image!.absolute) : const Icon(Icons.image),
+                      child:_image!= null ? Image.file(_image!.absolute) : const Icon(Icons.image, color: Colors.white,),
                       // return Utility.imageFromBase64String(photo.photoName ?? "");
 
                     ),

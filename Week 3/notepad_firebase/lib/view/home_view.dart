@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Color(0xff6699cc),
         appBar: AppBar(
           flexibleSpace: Container(
             decoration:  BoxDecoration(
@@ -39,6 +39,10 @@ class _HomeViewState extends State<HomeView> {
           ),
           title:  const Text('Notepad', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),),
           actions: [
+            IconButton(onPressed: (){
+              auth.signOut();
+              Navigator.pushReplacementNamed(context, RouteNames.login);
+            }, icon: Icon(Icons.logout))
             // Consumer(builder: (context, value, child){
             //   return PopupMenuButton(
             //       icon: Icon(Icons.more_vert),
@@ -254,7 +258,7 @@ class _HomeViewState extends State<HomeView> {
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => AddNote()));
           },
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.blue.shade800,
           child: Icon(Icons.add, size: 40,
           ),
         )

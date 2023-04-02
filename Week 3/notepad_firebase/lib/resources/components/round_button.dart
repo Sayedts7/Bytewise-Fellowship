@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../colors.dart';
 
-class Round_Button extends StatelessWidget {
+class RoundButton extends StatelessWidget {
   final String title;
   final bool loading;
   final VoidCallback onpress;
-  const Round_Button({Key? key,
+  const RoundButton({Key? key,
     required this.title,
     this.loading = false,
   required this.onpress,
@@ -17,13 +17,20 @@ class Round_Button extends StatelessWidget {
     return InkWell(
       onTap: onpress,
       child: Container(
-        height: 40,
-        width: 200,
+        height: 50,
+        width: MediaQuery.of(context).size.width * 1,
         decoration: BoxDecoration(
-          color: AppColors.green,
-          borderRadius: BorderRadius.circular(20)
+            gradient: LinearGradient(
+                colors: [Colors.lightBlueAccent, Colors.blue.shade900]),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.white)
         ),
-        child: Center(child: loading ? CircularProgressIndicator() : Text(title, style: TextStyle(color: AppColors.white, ),)),
+        child: Center(child: loading ?
+        const CircularProgressIndicator(
+          color: Colors.white,
+        )
+            :
+        Text(title, style: TextStyle(color: AppColors.white,fontSize: 20 ),)),
       ),
     );
   }

@@ -36,15 +36,17 @@ class _Login_viewState extends State<Login_view> {
 
     _obsecurePassword.dispose();
   }
+
+  bool load = false;
   @override
   Widget build(BuildContext context) {
-    final authViewModel = Provider.of<Auth_view_model>(context);
+    final authViewModel = Provider.of<Auth_view_model>(context, listen: false);
     final height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 15),
             child: Column(
               children: [
                 const Image(
@@ -67,13 +69,19 @@ class _Login_viewState extends State<Login_view> {
                       Utils.fieldFoucsChange(context, emailFocusnode, passwordFocusNode);
                     },
                     decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.alternate_email),
+                      filled: true,
+                      fillColor: Colors.white70,
                       hintText: 'Enter username',
+
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5)
+                          borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.lightBlueAccent)
 
                       ),
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5)
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(color: Colors.lightBlueAccent)
 
                       ),
                     ),
@@ -88,6 +96,8 @@ class _Login_viewState extends State<Login_view> {
                         obscuringCharacter: '*',
                         focusNode: passwordFocusNode,
                         decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white70,
                           hintText: 'Enter password',
                           prefixIcon: Icon(Icons.lock_open),
                           suffixIcon: InkWell (
@@ -97,11 +107,15 @@ class _Login_viewState extends State<Login_view> {
                               child: _obsecurePassword.value ? const Icon(Icons.visibility_off) :
                               const Icon(Icons.visibility)),
                           enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5)
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: Colors.lightBlueAccent)
+
 
                           ),
                           focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5)
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: Colors.lightBlueAccent)
+
 
                           ),
                         ),
@@ -113,68 +127,79 @@ class _Login_viewState extends State<Login_view> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: const [
-                      Text('Forgot password?', style: TextStyle(fontSize: 16, color: Color(0xff7B7B7B),
+                      Text('Forgot password?', style: TextStyle(fontSize: 16, color: Colors.white,
                       ),),
                     ],
                   ),
                 ),
                 SizedBox(
-                  height: height * 0.1,
+                  height: height * 0.03,
                 ),
-                Round_Button(title: 'Log In',
-                    loading: Auth_view_model.loading,
-                    onpress: (){
-                      if(_emailcontroller.text.isEmpty){
-                        Utils.snackBar("please enter email", context);
-                      } else if(_passwordcontroller.text.isEmpty){
-                        Utils.snackBar("please enter password", context);
+                 RoundButton(title: 'Log In',
+                      loading: load,
+                      onpress: (){
+                        if(_emailcontroller.text.isEmpty){
+                          Utils.snackBar("please enter email", context);
+                        } else if(_passwordcontroller.text.isEmpty){
+                          Utils.snackBar("please enter password", context);
 
-                      }else if(_passwordcontroller.text.length < 6){
-                        Utils.snackBar("please enter 6 digit password", context);
+                        }else if(_passwordcontroller.text.length < 6){
+                          Utils.snackBar("please enter 6 digit password", context);
 
-                      }else{
-                        _auth.signInWithEmailAndPassword(
-                            email: _emailcontroller.text.toString(),
-                            password: _passwordcontroller.text.toString()).then((value) {
-                              Utils.toastMessage('Login Succesful');
-                              Navigator.pushReplacementNamed(context, RouteNames.Home);
-                        }).onError((error, stackTrace) {
-                          Utils.toastMessage(error.toString());
-                        });
+                        }else{
 
-                      }
+                          //  authViewModel.setlaoding(true);
+                          // print(Auth_view_model.loading);
+                           setState(() {
+                             load = true;
+                           });
 
-                    }),
+                          _auth.signInWithEmailAndPassword(
+                              email: _emailcontroller.text.toString(),
+                              password: _passwordcontroller.text.toString()
+                          ).then((value) {
+                                // authViewModel.setlaoding(false);
+                                setState(() {
+                                  load = false;
+                                });
+                            Utils.toastMessage('Login Succesful');
+                            Navigator.pushReplacementNamed(context, RouteNames.Home);
+                          }).onError((error, stackTrace) {
+                            // print(Auth_view_model.loading);
+                            // authViewModel.setlaoding(false);
+                            setState(() {
+                              load = false;
+                            });
+                            Utils.toastMessage(error.toString());
+                          });
+
+                        }
+
+                      }),
+
 
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.052),
+                  padding: const EdgeInsets.only(top: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('Sign-in with', style: TextStyle(fontSize: 14),),
+                    children:  [
+                      const Text('Dont have an account?'),
+
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, RouteNames.SignUp);
+                        },
+                        child: const Text('Create One',
+                          style: TextStyle(
+                            fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline ),),
+                      )
                     ],
                   ),
-                ),
-
-
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:  [
-                    Text('Dont have an account?'),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.pushNamed(context, RouteNames.SignUp);
-                      },
-                      child: Text('Create One',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline ),),
-                    )
-                  ],
                 )
               ],
             ),

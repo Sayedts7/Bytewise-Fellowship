@@ -136,7 +136,7 @@ class _Note_screenState extends State<Note_screen> {
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Column(
                     children: [
-                      Text(widget.time, style: const TextStyle(fontSize: 25),),
+                      Text(widget.time, style: const TextStyle(fontSize: 15, color: Colors.white),),
                       Text('')
                     ],
                   ),
@@ -156,7 +156,7 @@ class _Note_screenState extends State<Note_screen> {
 
                   decoration: const InputDecoration(
                       hintText: 'title',
-                      hintStyle: TextStyle(fontSize: 20, color: Colors.grey,fontWeight: FontWeight.bold),
+                      hintStyle: TextStyle(fontSize: 20, color: Colors.white70,fontWeight: FontWeight.bold),
                       border: InputBorder.none
                   ),
                 ),
@@ -177,7 +177,7 @@ class _Note_screenState extends State<Note_screen> {
 
                   decoration: const InputDecoration(
                       hintText: 'Note something down',
-                      hintStyle: TextStyle( color: Colors.grey,),
+                      hintStyle: TextStyle( color: Colors.white70,),
                       border: InputBorder.none
                   ),
                 ),

@@ -26,10 +26,7 @@ class MyApp extends StatelessWidget {
     child:  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Notepad',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
-      ),
+      theme:ThemeData(scaffoldBackgroundColor: const Color(0xff6699cc)),
       initialRoute: RouteNames.Splash,
       onGenerateRoute: Routes.generateRoute,
     ));
