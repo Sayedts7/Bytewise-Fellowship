@@ -1,0 +1,2 @@
+In week 2, We learned about APIs, and practiced them. Also, we discovered mvvm architecture.
+I have done some work in mvvm architecture using API and also created an App called General Knowledge app using API which has information about countries.

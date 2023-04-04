@@ -1,0 +1,6 @@
+In week 3, We learned about plugins and packages. Also, we learned Firebase.
+I learned how to set up account on firebase, create authentication with email and password and phone, i learned how to use firebase Realtime and firestore database.
+Then I created a notepad app using that knowledge which has authentication and is connected to firebase firestore.
+
+I have already created same notepad app using SQLite.
+GitHub link: https://github.com/Sayedts7/Notepad-App-Flutter
