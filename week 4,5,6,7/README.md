@@ -1,7 +1,7 @@
 # Bytewise-Fellowship
 This README provides a comprehensive guide to Flutter Animations.
 
-Introduction
+Introduction to animation
 =============
 Animations add life to your application by making it more interactive and engaging. Flutter provides a rich set of APIs for creating different types of animations. Flutter animations are easy to use, fast, and customizable.
 
