@@ -68,6 +68,10 @@ class _MyFadeTestState extends State<MyFadeTest> with SingleTickerProviderStateM
       ),
     );
   }
-}
+}```
 
+In the above example, we create an AnimationController object with a duration of 2 seconds and a CurvedAnimation object with an ease-in curve. We then use the FadeTransition widget to animate the opacity of the text widget.
+
+#Conclusion#
+Flutter provides a rich set of APIs for creating animations. Animations can add life to your application by making it more interactive and engaging. Flutter animations are easy to use, fast, and customizable. Use the above guide to create animations in your Flutter application.
 
