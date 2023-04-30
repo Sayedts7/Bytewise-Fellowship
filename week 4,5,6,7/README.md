@@ -128,3 +128,40 @@ Animation<double> _animation = CurvedAnimation(
 
 # Animated Widgets #
 Animated widgets are widgets that can be animated using an Animation object. They automatically update themselves whenever their animation value changes. Flutter provides several built-in animated widgets, including AnimatedOpacity, AnimatedContainer, and AnimatedBuilder. Custom animated widgets can also be created by extending the AnimatedWidget class.
+
+```dart
+
+class MyAnimatedWidget extends AnimatedWidget {
+  MyAnimatedWidget({
+    Key key,
+    Animation<double> animation,
+  }) : super(key: key, listenable: animation);
+
+  @override
+  Widget build(BuildContext context) {
+    final Animation<double> animation = listenable;
+    return Opacity(
+      opacity: animation.value,
+      child: Text('Flutter Animation'),
+    );
+  }
+}
+
+AnimationController _animationController = AnimationController(
+  duration: const Duration(seconds: 1),
+  vsync: this,
+);
+
+Animation<double> _animation = CurvedAnimation(
+  parent: _animationController,
+  curve: Curves.easeInOut,
+);
+
+MyAnimatedWidget(
+  animation: _animation,
+)
+```
+In the above example, we create a custom animated widget that fades in and out based on the value of the animation. We then use the CurvedAnimation class to specify an easing curve for the animation.
+
+# Conclusion
+Flutter animations are a powerful way to bring your application to life. They can be used to create smooth transitions and engaging user experiences. By using the AnimationController, Curve, and AnimatedWidget classes, you can create sophisticated animations that are easy to customize and control.
