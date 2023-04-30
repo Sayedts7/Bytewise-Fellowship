@@ -24,6 +24,8 @@ class Routes{
     case RouteNames.Splash:
       return MaterialPageRoute(builder: (context)=> const Splash_Screen());
 
+
+
     default:
         return MaterialPageRoute(builder: (_){
           return const Scaffold(

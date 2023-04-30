@@ -52,6 +52,9 @@ dependencies:
   datetime_picker_formfield_new: ^2.0.0
   image_gallery_saver: '^1.7.1'
   permission_handler: ^10.2.0
+  video_player: ^2.6.1
+  card_swiper: ^2.0.4
+#  flutter_swiper: ^1.1.6
 
 
 
