@@ -29,7 +29,8 @@ Flutter provides a rich set of APIs for creating animations. Here is a step-by-s
   3. Animate the widget using the AnimatedBuilder widget.
 
 Here's an example of how to use the Animation API to create a simple animation that fades a widget in and out:
-Markup :  `code(
+
+```dart
 class MyFadeTest extends StatefulWidget {
   @override
   _MyFadeTestState createState() => _MyFadeTestState();
@@ -68,5 +69,5 @@ class _MyFadeTestState extends State<MyFadeTest> with SingleTickerProviderStateM
     );
   }
 }
-)`
+
 
