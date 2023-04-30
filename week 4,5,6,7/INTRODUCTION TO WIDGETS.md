@@ -57,4 +57,31 @@ Flutter provides a wide variety of built-in widgets that you can use to build yo
 ### Text
 The Text widget displays a string of text on the screen.
 
-``` dart Text('Hello, World!');
+``` dart 
+Text('Hello, World!');
+```
+
+### Icon
+The Icon widget displays a vector icon on the screen.
+
+ ```dart 
+ Icon(Icons.favorite);
+ ```
+### Image
+The Image widget displays an image on the screen.
+
+```dart
+Image.network('https://example.com/image.jpg');
+```
+### Button
+The ElevatedButton widget displays a button on the screen that the user can press.
+```dart ElevatedButton(
+  onPressed: () {
+    print('Button pressed!');
+  },
+  child: Text('Press me'),
+);
+```
+## Conclusion
+Flutter widgets are the building blocks of a Flutter app's user interface. They can be simple or complex, and can be combined to make complex, responsive UIs in a fast
+
