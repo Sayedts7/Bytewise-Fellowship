@@ -68,7 +68,8 @@ class _MyFadeTestState extends State<MyFadeTest> with SingleTickerProviderStateM
       ),
     );
   }
-}```
+}
+```
 
 In the above example, we create an AnimationController object with a duration of 2 seconds and a CurvedAnimation object with an ease-in curve. We then use the FadeTransition widget to animate the opacity of the text widget.
 
