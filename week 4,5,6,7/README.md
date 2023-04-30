@@ -87,7 +87,7 @@ Flutter provides a rich set of APIs for creating animations. Animations can add 
 
 
 
-#Animation Controllers#
+# Animation Controllers #
 
 Animation controllers are used to manage the lifecycle of an animation. They control the duration, direction, and speed of an animation. An animation controller can be created using the AnimationController class. The class constructor requires a duration and a TickerProvider. The duration specifies the length of the animation, and the TickerProvider provides the source of ticks that drive the animation.
 
@@ -109,7 +109,22 @@ _animationController.reverse(); // Reverses the animation
 _animationController.stop(); // Stops the animation
 ```
 
-#Animation Curves#
+# Animation Curves #
 
 Animation curves define the rate at which the animation progresses over time. They can be used to create smooth transitions between animation states.
 Flutter provides a range of built-in animation curves, such as Curves.linear, Curves.easeIn, and Curves.easeOut. Custom animation curves can also be created using the Curve class.
+
+```dart
+AnimationController _animationController = AnimationController(
+  duration: const Duration(seconds: 1),
+  vsync: this,
+);
+
+Animation<double> _animation = CurvedAnimation(
+  parent: _animationController,
+  curve: Curves.easeInOut,
+);
+```
+
+# Animated Widgets #
+Animated widgets are widgets that can be animated using an Animation object. They automatically update themselves whenever their animation value changes. Flutter provides several built-in animated widgets, including AnimatedOpacity, AnimatedContainer, and AnimatedBuilder. Custom animated widgets can also be created by extending the AnimatedWidget class.
