@@ -12,7 +12,6 @@ class Utils{
 
   }
 
-
   static toastMessage(String message){
     Fluttertoast.showToast(
         msg: message,
